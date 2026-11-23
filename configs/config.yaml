@@ -1,0 +1,18 @@
+
+# Airline Passenger Satisfaction
+# Project configuration
+
+# Dataset paths
+data:
+  train_path: "Dataset/train.csv"
+  test_path: "Dataset/test.csv"
+  target: "satisfaction"
+
+# Validation settings
+validation:
+  test_size: 0.2
+  random_state: 42
+
+# Model output
+model:
+  save_path: "models/best_model.pkl"
