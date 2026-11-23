@@ -37,15 +37,9 @@
 
 ## 1. Project Overview
 
-This project predicts whether an airline passenger is **satisfied** or **neutral / dissatisfied**, using their profile, flight information and their ratings of 14 airline services.
+Airline passenger satisfaction depends on several aspects of the travel experience, from flight characteristics and passenger profiles to the quality of onboard and airport services.
 
-It has two goals:
-
-- **Prediction:** train and compare classical classification models studied in the Machine Learning course.
-- **Interpretation:** identify the services and passenger characteristics most associated with satisfaction, to point out possible areas for improvement.
-
-As required by the project guidelines, the focus is on understanding the data and justifying each preprocessing choice, rather than on reaching the highest possible score.
-
+As part of an academic Machine Learning project, we investigate how these factors relate to overall passenger satisfaction and how they can be used to predict whether a passenger is **satisfied** or **neutral/dissatisfied**. Using supervised binary classification, we focus not only on making predictions but also on understanding the data, exploring preprocessing methods and analysing how different choices affect the results.
 <div align="right"><a href="#top">Back to top ↑</a></div>
 
 ## 2. Dataset
