@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="260" viewBox="0 0 1200 260">
+  <rect width="1200" height="260" fill="#344035"/>
+  <text x="60" y="112" font-family="Helvetica, Arial, sans-serif" font-size="54" font-weight="700" fill="#CFD5BB">Airline Passenger Satisfaction</text>
+  <text x="60" y="158" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#B0CEB1">Predicting passenger satisfaction with classical machine learning</text>
+  <text x="60" y="198" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#80999A">Integrated ML Project · UIR · Group 17 · 2026–2027</text>
+  <text x="1040" y="150" font-family="Helvetica, Arial, sans-serif" font-size="110" fill="#926749">✈</text>
+  <rect x="0"   y="244" width="240" height="16" fill="#344035"/>
+  <rect x="240" y="244" width="240" height="16" fill="#80999A"/>
+  <rect x="480" y="244" width="240" height="16" fill="#B0CEB1"/>
+  <rect x="720" y="244" width="240" height="16" fill="#CFD5BB"/>
+  <rect x="960" y="244" width="240" height="16" fill="#926749"/>
+</svg>
