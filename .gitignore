@@ -21,3 +21,6 @@ venv/
 
 # Project reference documents
 Enonce/
+
+# Reports (kept locally, not on GitHub)
+Rapport/
