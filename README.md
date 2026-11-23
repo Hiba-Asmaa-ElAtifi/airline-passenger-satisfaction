@@ -121,33 +121,44 @@ These comparisons will help us justify our final pipeline rather than selecting 
 
 ## 4. Key Findings from the EDA
 
-| Finding | Consequence for the project |
-|:---|:---|
-| 69% of Business class passengers are satisfied, vs. 19% in Economy | Class and type of travel are strong candidate predictors |
-| Online boarding, entertainment and seat comfort show the largest rating gaps between the two groups | Services to check in the model interpretation |
-| Almost all passengers who rated Wi-Fi as 0 (*not applicable*) are satisfied | Zeros must not be replaced by an average; an indicator column is tested |
-| Departure and arrival delays are strongly correlated (r = 0.965); 310 arrival delays are missing | Simple median imputation is enough |
-| No duplicated rows | No row removal needed |
+Before training our models, we explored the dataset to better understand the passenger experience and identify the main points to consider during preprocessing.
 
-Full analysis: [`notebooks/01_dataset_exploration.ipynb`](notebooks/01_dataset_exploration.ipynb)
+A few observations stood out:
+
+| What we found | Why it matters |
+|:---|:---|
+| **Travel class:** around 69% of Business class passengers are satisfied, compared with 19% in Economy. | Travel class may be an important feature for predicting satisfaction. |
+| **Service experience:** online boarding, inflight entertainment and seat comfort show some of the largest rating differences between the two satisfaction groups. | These services are worth examining when interpreting our models. |
+| **Zero ratings:** some services contain zero-valued ratings, including inflight Wi-Fi. | Rather than automatically replacing zeros with an average, we will investigate whether keeping them or adding indicator features produces better results. |
+| **Flight delays:** departure and arrival delays are strongly correlated (r = 0.965), and 310 arrival-delay values are missing from the training set. | We need to handle missing values and consider the relationship between these two features during preprocessing. |
+| **Duplicate records:** no duplicate rows were found. | No duplicate removal is needed based on our initial checks. |
+
+These findings give us a starting point for the next stages of the project. They help us decide which preprocessing methods to investigate and which features deserve closer attention when evaluating the models.
+
+The complete analysis, including visualisations and Python code, is available in [`notebooks/01_dataset_exploration.ipynb`](notebooks/01_dataset_exploration.ipynb).
 
 <div align="right"><a href="#top">Back to top ↑</a></div>
 
 ## 5. Repository Structure
 
+We have organised the project into separate modules to keep the code clear, reusable and easy to maintain. Each file has a specific responsibility, making it easier to understand the different stages of our machine learning workflow.
+
 ```text
 airline-passenger-satisfaction/
+│
 ├── assets/
 │   └── banner.svg
+│
 ├── configs/
 │   └── config.yaml
+│
 ├── Dataset/
 │   ├── train.csv
 │   └── test.csv
-├── models/
-│   └── best_model.pkl
+│
 ├── notebooks/
 │   └── 01_dataset_exploration.ipynb
+│
 ├── src/
 │   ├── data.py
 │   ├── preprocessing.py
@@ -155,28 +166,35 @@ airline-passenger-satisfaction/
 │   ├── train.py
 │   ├── evaluate.py
 │   └── utils.py
+│
+├── models/
+│   └── best_model.pkl
+│
 ├── main.py
 ├── test.py
 ├── requirements.txt
 └── README.md
 ```
 
-| File | Role |
-|:---|:---|
-| `main.py` | Training entry point: runs the whole pipeline and saves the best model |
-| `test.py` | Loads the saved model and predicts on new passengers, without retraining |
-| `configs/config.yaml` | All paths and settings used by the code |
-| `src/data.py` | Loads the CSV files and creates the train / validation split |
-| `src/preprocessing.py` | Imputation, encoding, scaling and zero-rating indicators |
-| `src/model.py` | Definition of the classification models |
-| `src/train.py` | Training and selection of the best hyperparameters |
-| `src/evaluate.py` | Metrics and confusion matrix |
-| `src/utils.py` | Reading the configuration, saving and loading the model |
+### How the files work together
 
-> Files in `src/`, `test.py` and `models/best_model.pkl` are being developed and will be added progressively.
+| File | Responsibility |
+|:---|:---|
+| `main.py` | Main entry point that will connect the different modules, run training and save the selected model. |
+| `test.py` | Will load the saved model to make predictions without retraining. |
+| `configs/config.yaml` | Stores dataset paths and project settings. |
+| `src/data.py` | Loads the datasets and prepares the training and validation split. |
+| `src/preprocessing.py` | Handles missing values, categorical encoding, feature scaling and zero-rating representation. |
+| `src/model.py` | Defines the classification algorithms used in the project. |
+| `src/train.py` | Handles model training and hyperparameter selection. |
+| `src/evaluate.py` | Calculates evaluation metrics and confusion matrices. |
+| `src/utils.py` | Provides reusable functions for configuration and model saving/loading. |
+
+The idea is to keep each part of the project independent while allowing the modules to work together as one complete pipeline.
+
+*Some files are still under development. Currently, `main.py` loads the project configuration; the training modules, independent inference script and saved model will be integrated progressively.*
 
 <div align="right"><a href="#top">Back to top ↑</a></div>
-
 ## 6. Installation
 
 **Prerequisites:** Python 3.10 or later, and Git.
