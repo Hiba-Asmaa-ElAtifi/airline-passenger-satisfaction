@@ -1,3 +1,4 @@
+
 <a id="top"></a>
 
 <div align="center">
@@ -6,13 +7,11 @@
 
 <br>
 
-![Python](https://img.shields.io/badge/Python-3.10+-344035?style=flat-square&logo=python&logoColor=CFD5BB)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-classical%20ML-80999A?style=flat-square&logo=scikitlearn&logoColor=white)
-![Task](https://img.shields.io/badge/Task-binary%20classification-B0CEB1?style=flat-square&labelColor=344035)
-![Course](https://img.shields.io/badge/UIR-2026–2027-926749?style=flat-square&labelColor=344035)
+![Python](https://img.shields.io/badge/Python-3.10%2B-4E787B?style=flat-square&logo=python&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-classical%20ML-A1C9C4?style=flat-square&logo=scikitlearn&logoColor=231F25)
+![Classification](https://img.shields.io/badge/Task-binary%20classification-42443B?style=flat-square&labelColor=231F25&logoColor=white)
 
 **Predicting whether an airline passenger is satisfied, and understanding which factors matter most.**
-
 
 </div>
 
@@ -38,9 +37,10 @@
 
 Airline passenger satisfaction depends on several aspects of the travel experience, from flight characteristics and passenger profiles to the quality of onboard and airport services.
 
-As part of an academic Machine Learning project, we investigate how these factors relate to overall passenger satisfaction and how they can be used to predict whether a passenger is **satisfied** or **neutral/dissatisfied**. 
+As part of an academic Machine Learning project, we investigate how these factors relate to overall passenger satisfaction and how they can be used to predict whether a passenger is **satisfied** or **neutral/dissatisfied**.
 
 Using supervised binary classification, we focus not only on making predictions but also on understanding the data, exploring preprocessing methods and analysing how different choices affect the results.
+
 <div align="right"><a href="#top">Back to top ↑</a></div>
 
 ## 2. Dataset
@@ -191,9 +191,10 @@ airline-passenger-satisfaction/
 
 The idea is to keep each part of the project independent while allowing the modules to work together as one complete pipeline.
 
-*Some files are still under development. Currently, `main.py` loads the project configuration; the training modules, independent inference script and saved model will be integrated progressively.*
+*This is the intended project structure. Some files are still under development. Currently, `main.py` loads the project configuration; the training modules, independent inference script and saved model will be integrated progressively.*
 
 <div align="right"><a href="#top">Back to top ↑</a></div>
+
 ## 6. Installation
 
 **Prerequisites:** Python 3.10 or later, and Git.
@@ -227,39 +228,43 @@ python -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
-The dataset is already included in `Dataset/`, so no extra download is needed.
+The dataset is included in `Dataset/`, so no additional download is needed.
 
 <div align="right"><a href="#top">Back to top ↑</a></div>
 
 ## 7. Usage
 
-### Train the model
+### Run the current project entry point
 
 ```bash
 python main.py
 ```
 
-This command loads the data, applies the preprocessing, trains the models, selects the best one on the validation set and saves it in `models/best_model.pkl`.
+At present, this command reads and displays the project configuration.
 
-### Predict on new passengers
+Once the remaining modules are integrated, the same command will load the datasets, apply preprocessing, train and compare models, and save the selected model in `models/best_model.pkl`.
+
+### Predict on new passengers — planned
+
+The independent inference script will be run with:
 
 ```bash
 python test.py
 ```
 
-This command loads the saved model and predicts the satisfaction of new passengers. It does not retrain anything, so `main.py` must have been run at least once before.
+Once implemented, this script will load the saved model and predict passenger satisfaction without retraining.
 
 ### Explore the analysis
 
-Open `notebooks/01_dataset_exploration.ipynb` in Jupyter or VS Code to see the exploratory analysis with its code and figures.
+Open [`notebooks/01_dataset_exploration.ipynb`](notebooks/01_dataset_exploration.ipynb) in Jupyter or VS Code to explore the dataset analysis, Python code and visualisations.
 
-> **Current state:** `main.py` currently loads and displays the configuration only. Training and `test.py` will be connected once the `src/` modules are complete.
+> **Current state:** The project configuration and exploratory analysis are complete. The training pipeline and inference script are still being developed.
 
 <div align="right"><a href="#top">Back to top ↑</a></div>
 
 ## 8. Configuration
 
-All settings are stored in `configs/config.yaml`, so no path or parameter is written directly in the code.
+Project settings are kept in `configs/config.yaml` so that commonly used paths and parameters can be managed in one place.
 
 | Key | Meaning | Current value |
 |:---|:---|:---|
@@ -267,16 +272,23 @@ All settings are stored in `configs/config.yaml`, so no path or parameter is wri
 | `data.test_path` | Test file | `Dataset/test.csv` |
 | `data.target` | Column to predict | `satisfaction` |
 | `validation.test_size` | Share of the training data used for validation | `0.2` |
-| `validation.random_state` | Seed that makes the split reproducible | `42` |
-| `model.save_path` | Where the trained model is saved | `models/best_model.pkl` |
+| `validation.random_state` | Seed for reproducible splitting | `42` |
+| `model.save_path` | Intended saved-model location | `models/best_model.pkl` |
 
-To change a setting, edit this file and run `python main.py` again.
+The configuration is already read by `main.py`. The remaining modules will be connected to these settings as development progresses.
 
 <div align="right"><a href="#top">Back to top ↑</a></div>
 
 ## 9. Results
 
-Results will be added after the evaluation step: validation scores of each model, effect of the preprocessing choices, final test performance and the most important features.
+Model results will be added after training and evaluation are complete.
+
+This section will include:
+
+- Validation scores for the classification models.
+- Comparisons of preprocessing choices.
+- Final performance on the held-out test set.
+- Model interpretation and influential features.
 
 <div align="right"><a href="#top">Back to top ↑</a></div>
 
@@ -284,20 +296,18 @@ Results will be added after the evaluation step: validation scores of each model
 
 | Component | Status |
 |:---|:---|
-| Dataset selection and inspection | ![Done](https://img.shields.io/badge/Done-B0CEB1?style=flat-square) |
-| Exploratory data analysis | ![Done](https://img.shields.io/badge/Done-B0CEB1?style=flat-square) |
-| Repository structure and configuration | ![Done](https://img.shields.io/badge/Done-B0CEB1?style=flat-square) |
-| Data loading and preprocessing | ![In progress](https://img.shields.io/badge/In%20progress-926749?style=flat-square) |
-| Model training and comparison | ![Planned](https://img.shields.io/badge/Planned-80999A?style=flat-square) |
-| Evaluation and interpretation | ![Planned](https://img.shields.io/badge/Planned-80999A?style=flat-square) |
-| Training and inference scripts | ![Planned](https://img.shields.io/badge/Planned-80999A?style=flat-square) |
-| Final report and presentation | ![Planned](https://img.shields.io/badge/Planned-80999A?style=flat-square) |
+| Dataset selection and inspection | ![Complete](https://img.shields.io/badge/Complete-A1C9C4?style=flat-square&labelColor=42443B) |
+| Exploratory data analysis | ![Complete](https://img.shields.io/badge/Complete-A1C9C4?style=flat-square&labelColor=42443B) |
+| Repository structure and configuration | ![Complete](https://img.shields.io/badge/Complete-A1C9C4?style=flat-square&labelColor=42443B) |
+| Data loading and preprocessing | ![In development](https://img.shields.io/badge/In%20development-D9DECA?style=flat-square&labelColor=4E787B) |
+| Model training and comparison | ![Planned](https://img.shields.io/badge/Planned-4E787B?style=flat-square&labelColor=231F25) |
+| Evaluation and interpretation | ![Planned](https://img.shields.io/badge/Planned-4E787B?style=flat-square&labelColor=231F25) |
+| Training and inference scripts | ![Planned](https://img.shields.io/badge/Planned-4E787B?style=flat-square&labelColor=231F25) |
+| Final report and presentation | ![Planned](https://img.shields.io/badge/Planned-4E787B?style=flat-square&labelColor=231F25) |
 
 <div align="right"><a href="#top">Back to top ↑</a></div>
 
 ## 11. Team
-
-**Group 17 — Université Internationale de Rabat**
 
 | Member | Main contribution |
 |:---|:---|
@@ -311,5 +321,7 @@ All members contribute to the final report and presentation.
 ---
 
 <div align="center">
+
 <sub>Integrated Machine Learning Project · Université Internationale de Rabat · 2026–2027 · Prof. Youness Moukafih</sub>
+
 </div>
