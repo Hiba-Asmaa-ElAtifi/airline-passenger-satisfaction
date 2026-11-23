@@ -13,7 +13,6 @@
 
 **Predicting whether an airline passenger is satisfied, and understanding which factors matter most.**
 
-[Installation](#6-installation) · [Usage](#7-usage) · [Configuration](#8-configuration) · [Exploratory analysis](notebooks/01_dataset_exploration.ipynb)
 
 </div>
 
