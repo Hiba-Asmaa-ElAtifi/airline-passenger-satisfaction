@@ -1,7 +1,19 @@
-pandas
+
+# Install all required libraries using:       pip install -r requirements.txt
+
+# Data manipulation
 numpy
-scikit-learn
+pandas
+
+# Data visualization
 matplotlib
 seaborn
-pyyaml
-ipykernel
+
+# Machine Learning
+scikit-learn
+
+# Model saving and loading
+joblib
+
+# Configuration
+PyYAML
