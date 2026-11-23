@@ -46,7 +46,7 @@ Using supervised binary classification, we focus not only on making predictions 
 
 ## 2. Dataset
 
-Source: [Airline Passenger Satisfaction — Kaggle](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction)
+We use the [Airline Passenger Satisfaction dataset — Kaggle](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction), which contains survey responses from 129,880 passengers.
 
 | File | Passengers | Used for |
 |:---|---:|:---|
@@ -54,7 +54,7 @@ Source: [Airline Passenger Satisfaction — Kaggle](https://www.kaggle.com/datas
 | `Dataset/test.csv` | 25,976 | Final evaluation only |
 | **Total** | **129,880** | |
 
-Each row is one passenger, described by **22 input features** and the target column `satisfaction`.
+Each row represents a passenger record, with **22 input features** and one target variable, `satisfaction`.
 
 | Passenger profile | Flight information | Service ratings (0–5) |
 |:---|:---|:---|
@@ -62,49 +62,60 @@ Each row is one passenger, described by **22 input features** and the target col
 | Customer Type | Class | Seat Comfort |
 | Age | Flight Distance | Inflight Entertainment |
 | | Departure Delay | Inflight Wi-Fi |
-| | Arrival Delay | + 10 other services |
+| | Arrival Delay | 10 additional services |
 
-- **Target classes:** neutral or dissatisfied (56.7%) and satisfied (43.3%).
-- **Rating of 0:** means *not applicable*, not a bad rating.
-- **`id` and `Unnamed: 0`:** identifiers, removed before training.
+**A few important details about the dataset:**
+
+- **Target classes:** neutral or dissatisfied (56.7%) and satisfied (43.3%) in the training set.
+- **Zero ratings:** a value of 0 may indicate *Not Applicable* rather than a negative evaluation.
+- **Identifiers:** `id` and `Unnamed: 0` are excluded from the model inputs.
 
 <div align="right"><a href="#top">Back to top ↑</a></div>
 
 ## 3. Methodology
 
-The project follows four steps.
+Our approach follows four main steps, from understanding the dataset to evaluating the final predictions.
 
-| Step | What is done | Where |
+| Step | What we do | Where |
 |:---|:---|:---|
-| **1. Exploratory analysis** | Data quality, distributions, class balance, link between each feature and satisfaction, study of zero ratings | `notebooks/` |
-| **2. Preprocessing** | Missing-value imputation, encoding of categorical features, scaling, representation of zero ratings | `src/preprocessing.py` |
-| **3. Training** | Training of the course models, hyperparameter selection on a validation set | `src/model.py`, `src/train.py` |
-| **4. Evaluation** | Accuracy, precision, recall, F1-score, confusion matrix, interpretation of the final model | `src/evaluate.py` |
+| **01. Exploratory Data Analysis** | Explore data quality, distributions, class balance, service ratings and their relationship with satisfaction. | `notebooks/` |
+| **02. Data Preprocessing** | Handle missing values, encode categorical features, scale numerical variables and investigate zero ratings. | `src/preprocessing.py` |
+| **03. Model Training** | Train classification models and compare hyperparameters using validation data. | `src/model.py`, `src/train.py` |
+| **04. Evaluation & Interpretation** | Compare model performance, examine prediction errors and identify influential features. | `src/evaluate.py` |
 
-Two rules are applied throughout:
+One important part of our approach is keeping the **training, validation and test data separate**. Preprocessing parameters are learned from the training data, while the validation set helps us compare different approaches. The test set is kept aside for the final evaluation.
 
-- All preprocessing parameters (median, mean, standard deviation) are computed on the **training data only**, then applied to the validation and test data. This prevents data leakage.
-- The test set is used **once**, at the very end, to evaluate the selected model.
+### Which models will we use?
 
-### Models
+We plan to work with the classical classification algorithms studied in our Machine Learning course.
 
-| Model | Hyperparameters tested |
+| Model | What we will explore |
 |:---|:---|
-| K-Nearest Neighbors | number of neighbors `k` |
-| Logistic Regression | regularisation strength `C` |
-| Linear Discriminant Analysis (LDA) | none |
-| Quadratic Discriminant Analysis (QDA) | none |
-| Decision Tree | maximum depth |
-| Random Forest | number of trees |
+| K-Nearest Neighbours (KNN) | Number of neighbours (K) |
+| Logistic Regression | Regularisation strength (C) |
+| Linear Discriminant Analysis (LDA) | Standard model |
+| Quadratic Discriminant Analysis (QDA) | Standard model |
+| Decision Tree | Maximum tree depth |
+| Random Forest | Number of trees |
 
-### Preprocessing comparisons
+We will compare their performance using the same validation approach and document the settings used for each model.
 
-To measure the effect of preprocessing choices, the same model is trained twice with a single change:
+### Does preprocessing make a difference?
 
-| Experiment | Model | Compared settings |
+This is one of the main questions behind our project.
+
+Instead of simply preparing the data and moving on, we want to understand whether some preprocessing decisions actually improve the predictions.
+
+We plan to investigate two comparisons:
+
+| Experiment | Model | What we compare |
 |:---|:---|:---|
-| Feature scaling | KNN | without vs. with standardisation |
-| Zero ratings | Logistic Regression | zeros kept as values vs. zeros + indicator columns |
+| **Feature scaling** | KNN | Predictions with and without standardisation |
+| **Zero ratings** | Logistic Regression | Keeping zeros as values versus adding zero-indicator features |
+
+In each experiment, we will keep the other settings unchanged so that we can better understand the effect of the preprocessing choice.
+
+These comparisons will help us justify our final pipeline rather than selecting a method without testing it.
 
 <div align="right"><a href="#top">Back to top ↑</a></div>
 
